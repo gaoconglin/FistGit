@@ -1,0 +1,11 @@
+腾讯地图：注册手机号 13662260642 登录账号QQ 1095826632
+
+Key名称：	storeManage
+D5OBZ-7MRW6-KLSSE-M4YQA-EG4XJ-7ABWG
+<script charset="utf-8" src="http://map.qq.com/api/js?v=2.exp&key=D5OBZ-7MRW6-KLSSE-M4YQA-EG4XJ-7ABWG"></script>
+
+应用于：	浏览器（调用Javascript API、JSONP调用WebService API、静态图API等）
+
+
+JavaScript API
+http://lbs.qq.com/javascript_v2/index.html
