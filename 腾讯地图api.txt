@@ -1,0 +1,11 @@
+key:
+D5OBZ-7MRW6-KLSSE-M4YQA-EG4XJ-7ABWG
+
+JavaScript API：
+http://lbs.qq.com/javascript_v2/index.html
+1、加载api
+<script charset="utf-8" src="http://map.qq.com/api/js?v=2.exp&key=D5OBZ-7MRW6-KLSSE-M4YQA-EG4XJ-7ABWG"></script>
+地图显示位置：使用百分比设置
+坐标格式：维度、经度
+
+
