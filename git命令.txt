@@ -1,0 +1,37 @@
+git服务器仓库地址：
+http://192.168.59.185/gm_h5/gm_h5.git
+
+注释：
+url（服务器仓库地址）
+dev（分支）
+
+1、克隆项目
+git clone url
+
+2、查看所有分支
+git branch -a 
+
+3、切换到分支下，并将代码克隆到本地
+git checkout dev
+
+4、查看当前分支状态
+git status
+
+5、创建分支
+git branch dev //创建dev分支
+git checkout -b dev //创建dev分支，并切换到dev分支下
+
+6、删除分支[必须checkout到父分支下才能删除父分支下的子分支]
+git branch -d dev //删除dev分支（如果dev有内容没有合并则会报错）
+git branch -D dev //强制删除dev分支
+
+7、提交代码
+git add test.java 	//将test.java文件添加到暂存区
+git add . 		//将所有新增、修改、删除文件添加到暂存区
+git commit -m "注释"   	//将暂存区文件提交到本地分支
+git checkout dev	//切换到主分支
+git fetch origin dev    //从远程的origin仓库的dev分支更新最新的版本到origin/dev分支上
+git cherry-pick commitId //没有冲突则直接合并，有冲突需要解决冲突
+git push 		//将主分支推送到服务器
+
+

@@ -1,0 +1,137 @@
+http://192.168.59.185/gm_h5/gm_h5.git
+注释：master(主分支)1c376f5
+      develop(自己创建的分支)
+      projectUrl(项目地址)   
+      test.txt(测试文件)
+
+git config --global user.name [username]   
+git config --global user.email [email] 
+git config --list 查看已设配置
+
+自定义缩写
+例：git config --global alias.ck checkout   //当用到checkout的时候就可以用ck来代替
+banrch ------br（备忘）
+commit ------ci（备忘）
+
+
+1、克隆项目
+    git clone projectUrl     //克隆地址后，会在master分支上
+    eg:git clone http://192.168.59.185/gm_h5/gm_h5.git
+
+2、创建分支
+    方法一：
+      git branch develop     //创建develop分支
+      git checkout develop   //切换到develop分支下
+
+    方法二：
+      git checkout -b develop//创建develop分支，并切换到develop分支下。
+
+3、删除分支[checkout到父分支下执行下面命令]
+    git branch -d develop    //删除develop分支(如果develop有内容没有合并则会报错)
+    git branch -D develop    //强制删除develop分支
+
+    git push origin :develop //删除服务器上远程分支(原理是把一个空分支push到server上，相当于删除该分支)
+
+4、新增、修改、删除代码提交
+    git add test.txt         //将test.txt添加到暂存区
+    git add .                //将所有新增、修改、删除文件添加到暂存区
+    git commit -m '注释'     //将暂存区文件提交到本地分支
+
+    git commit -a -m '注释'  //执行该命令就不用先执行git add操作了，但是新增的文件可能不会被提交【不建议使用】
+
+5、合并分支并提交到服务端
+    方法一：
+	git add .
+        git commit -m "ccc"
+      (1)git checkout gmh5      //切换到主分支
+      (2)git pull origin gmh5   //拉取主分支最新代码
+      (3)git merge zhoumm        //合并分支到主分支
+      存在冲突，解决冲突后
+        ①git add .
+        ②git commit -m '注释'
+      (4)git push origin z   //将合并后的分支推送到服务端
+
+    方法二：
+      (1)git checkout master      //切换到主分支
+      (2)git pull origin master   //拉取主分支最新代码
+      (3)git checkout develop     //切换到develop分支
+      (4)git rebase master        //将主分支代码合并到develop分支
+      存在冲突，解决冲突后
+        ①git add .              
+        ②git rebase --continue   //提交解决冲突后文件，合并提交点
+      (5)git checkout master      //切换到主分支
+      (6)git merge develop        //合并develop分支
+      (7)git push origin master   //将主分支推送到服务端
+
+	方法三：
+      (1)git add .                        //添加修改后的代码
+      (2)git commit -m '注释'             //提交修改后的代码
+      (3)git checkout master              //切换到主分支
+      (4)git fetch --all
+      (5)git pull origin master
+      (6)git cherry-pick commitId         //根据commitId合并提交点
+      存在冲突，解决冲突后
+        git add .                        
+        git cherry-pick --continue        //报错的话，按shift+Z,Z键连按两下
+      (7)git push origin master                  //推送到服务端8e483c1
+    
+6、更新代码
+    方法一：
+      git fetch origin develop          //从远程的origin仓库的develop分支更新最新的版本到origin/develop分支上
+      git log -p develop..origin/develop//比较本地的develop分支和origin/develop分支的差别
+      git merge origin/develop          //合并内容到本地的develop分支
+    
+    方法二：
+      git pull origin develop           //更新远程仓库代码到本地仓库，并将内容合并到当前分支
+
+7、撤销修改、add、commit操作
+    (1)还原修改过的test.txt文件（未提交）
+      git checkout test.txt    //还原修改过的test.txt文件
+      git checkout *.txt       //还原所有修改过的.txt文件
+      git checkout .           //还原所有修改过的文件
+      git clean -xdf     //还原未提交的更改
+
+    (2)撤销git add过的文件
+      git reset HEAD test.txt   //撤销添加到暂存区的test.txt文件
+      git reset .               //撤销所有添加到暂存区的文件
+
+    (3)撤销git commit过的文件
+      ①git reset --mixed HEAD^  //默认方式，等同于不带任何参数的git reset,它回退到上一个版本，只保留源码，回退commit和index信息
+      ②git reset --soft HEAD^   //回退到上一个版本，只回退了commit信息，不会恢复到index file一级。如果还要提交，直接commit即可。
+      ③git reset --hard HEAD^   //彻底回到某个上一个版本，本地的源码也会变为上一个版本的内容，【慎用！】
+ 
+      HEAD    当前的提交
+      HEAD^   上一次提交
+      HEAD^ ^ 上一次的 上一次的提交（倒数第三次）
+      HEAD^^^ 倒数 第四次的 提交
+
+      HEAD~0 最近一个提交
+      HEAD~1 上一次提交
+      HEAD^2 上一次的 上一次的提交（倒数第三次）
+      HEAD^3 倒数 第四次的 提交
+
+
+8、其他命令
+      git reflog       //可以查看所有分支的所有操作记录（包括（包括commit和reset的操作）,包括已经被删除的commit记录                 git log          //不能能察看已经删除了的commit记录
+      git status       //查看当前分支状态
+      git branch       //查看当前分支
+      git branch -a    //查看所有分支
+      git branch -av   //查看所有分支最新提交
+      git log --graph  //命令可以看到分支合并图。
+
+
+代码已更新   但，没rebase
+
+
+//可以出现分支线
+git merge 分支名 --no-ff 
+
+
+
+移动蓝   #0780ce
+
+移动绿   #8fc320
+
+移动红   #e30076
+
+
